@@ -1,0 +1,25 @@
+From: Example Digest <digest@example.com>
+To: reader@example.com
+Subject: Fwd: Example Digest: Issue 42
+Date: Thu, 13 Aug 2026 06:00:00 +0000
+Message-ID: <fake-issue-42@example.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><head><title>ignored</title><style>p{color:red}</style></head><body>
+<h1><a href="https://news.example.com/issue/42">Example Digest: Issue 42</a></h1>
+<p>Welcome to a made-up issue. Everything in this file is invented for tests.</p>
+<div><a href="https://news.example.com/r/abc123?utm_source=email">The slow rise of community orchards</a></div>
+<p>Jane Roe | Example Gazette | 13th August 2026 | U Orchards are returning to empty city lots.</p>
+<div><a href="https://click.example.net/track?url=https%3A%2F%2Fexample.org%2Fessay%3Futm_source%3Dnews&id=9">Why seed libraries keep growing</a></div>
+<p>Sam Poe | Sample Review | March 2026 | M A look at lending seeds like books.</p>
+<div><a href="https://news.example.com/r/def456">Listening to the river | Example Audio Show</a></div>
+<p>Podcast: a field recording walk along a quiet river.</p>
+<div><a href="https://news.example.com/r/ghi789">Pruning apple trees | YouTube | Example Channel | 12m 04s</a></div>
+<p>Video. A patient lesson in winter pruning.</p>
+<p>Last week's <a href="https://example.org/reports/long-report-on-seed-libraries">long report on seed libraries</a> shows that borrowing beats buying.</p>
+<p><a href="https://twitter.com/example/status/1">Share this on social media for everyone</a></p>
+<p><a href="https://news.example.com/faq">Frequently asked questions about this digest</a></p>
+<p><a href="https://news.example.com/r/jkl012">Letters to the editor are always welcome here</a></p>
+<p><a href="https://news.example.com/unsubscribe?x=1">Unsubscribe from this digest</a></p>
+</body></html>

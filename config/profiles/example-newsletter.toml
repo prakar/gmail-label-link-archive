@@ -1,0 +1,68 @@
+# Extraction profile for ONE newsletter layout. Copy this file, rename it, and edit it for the emails in your own label.
+# Every regular expression is case-insensitive. Use single quotes for regexes so backslashes need no escaping.
+# The names below belong to a made-up newsletter ("Example Digest"); nothing here describes a real publication.
+
+name = "example-newsletter"
+
+[filter]
+min_title_chars = 18                       # links with shorter text are ignored unless they sit in a heading
+skip_text  = 'unsubscribe|manage (your )?(preferences|subscription)|view (this )?(email )?in (your )?browser|forward to a friend|privacy policy|terms of (use|service)|^share( on)?\b'
+skip_hosts = '(^|\.)(facebook|twitter|x|instagram|linkedin|pinterest|t)\.com$|(^|\.)(wa\.me|bit\.ly)$'
+always_consider_regex = 'frequently asked|letters to the editor'   # short footer links you still want classified (optional)
+unwrap_keys = ["url", "u", "redirect", "redirect_url", "target", "link", "q"]   # tracking wrappers like ?url=https%3A//real
+drop_param_prefixes = ["utm_", "mc_", "fbclid", "gclid"]
+
+[blurb]
+max_chars = 700                            # the blurb is the link's own block plus following plain-text blocks
+
+[meta]
+# Metadata line printed under each article: "Author | Publication | Date | Flag [optional comment]".
+# Named groups used: author, publication, date, flag, comment. The flag group is required here: it anchors the date.
+regex = '^(?P<author>[^|]+?)\s*\|\s*(?P<publication>[^|]+?)\s*\|\s*(?P<date>[^|]+?)\s*\|\s*(?P<flag>[A-Z]{1,2})(?=\s|$)(?:\s+(?P<comment>.*))?$'
+date_formats = ["%d %B %Y", "%d %b %Y", "%B %Y", "%Y"]   # tried in order after removing 1st, 2nd, 3rd, 4th
+
+# Rules run in order; the first rule whose conditions ALL hold decides the link's kind. No match: kind "other".
+# Conditions: title_regex, blurb_regex (tested after trimming leading space), subject_regex, any_regex (title, or the start
+# of the blurb), title_equals_subject = true, use_meta = true (the blurb must match [meta].regex; its groups fill the fields).
+# Optional per rule: case_sensitive = true (default false). [meta] accepts it too. Inside one regex, (?-i:...) also works.
+# Every condition in a rule must hold (AND). For "A or B", write two rules with the same kind.
+[[rules]]
+kind = "issue"                             # the link back to this email's own web version
+title_equals_subject = true
+
+[[rules]]
+kind = "footer"
+any_regex = 'frequently asked|letters to the editor|for any queries'
+
+[[rules]]
+kind = "article"
+use_meta = true
+
+[[rules]]
+kind = "podcast"
+blurb_regex = '^podcast'
+
+[[rules]]
+kind = "video"
+blurb_regex = '^video'
+
+# Titles of the form "Title | Show" become a title plus a detail field.
+[[split_title]]
+kind = "podcast"
+field = "show"
+
+[[split_title]]
+kind = "video"
+field = "channel"
+
+[kinds]
+keep = ["article", "podcast", "video", "other"]      # kinds that go into the RSS link feed (all kinds stay in the archive)
+resolve = ["article", "podcast", "video", "other"]   # kinds whose tracking links `resolve` follows
+
+[resolve]
+# Only if the newsletter wraps its links in redirects on its own domain, e.g. https://news.example.com/r/abc123.
+# Leave hosts empty ([]) to switch resolving off. Resolving makes ONE request per distinct link to that host
+# (never to the article itself): check the publisher's terms first and keep the delay polite.
+hosts = ["news.example.com"]
+path_prefix = "/r/"
+drop_ref_values = []                       # e.g. ["news.example.com"] drops ?ref=news.example.com from resolved targets

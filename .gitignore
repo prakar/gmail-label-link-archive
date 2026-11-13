@@ -1,0 +1,29 @@
+# Credentials and personal config: never commit
+config/credentials.json
+config/accounts.json
+config/profiles/*
+!config/profiles/example-newsletter.toml
+*.env
+.env*
+
+# Archives, raw email, raw HTML, feeds
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.eml
+!tests/fixtures/*.eml
+*.mbox
+*.html
+!tests/fixtures/*.html
+*.xml
+feeds/
+archive/
+out/
+data/
+backfill/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

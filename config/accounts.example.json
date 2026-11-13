@@ -1,0 +1,19 @@
+{
+  "title": "My link archive",
+  "out_dir": "~/feeds",
+  "data_dir": "~/.local/share/gmail-label-link-archive",
+  "base_url": "",
+  "accounts": [
+    {
+      "name": "personal",
+      "user": "you@example.com",
+      "labels": [
+        {
+          "label": "Newsletters/Example Digest",
+          "source": "example-digest",
+          "profile": "example-newsletter"
+        }
+      ]
+    }
+  ]
+}
